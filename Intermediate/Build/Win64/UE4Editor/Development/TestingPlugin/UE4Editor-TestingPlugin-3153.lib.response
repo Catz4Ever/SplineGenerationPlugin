@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-TestingPlugin-3153.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\Unreal Engine\Test\SplineTesting2EB\Intermediate\Build\Win64\SplineTesting2EBEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"D:\Unreal Engine\Test\SplineTesting2EB\Plugins\TestingPlugin\Intermediate\Build\Win64\UE4Editor\Development\TestingPlugin\Module.TestingPlugin.cpp.obj"
+"D:\Unreal Engine\Test\SplineTesting2EB\Plugins\TestingPlugin\Intermediate\Build\Win64\UE4Editor\Development\TestingPlugin\Module.TestingPlugin.gen.cpp.obj"
+"D:\Unreal Engine\Test\SplineTesting2EB\Plugins\TestingPlugin\Intermediate\Build\Win64\UE4Editor\Development\TestingPlugin\Default.rc2.res"
+/OUT:"D:\Unreal Engine\Test\SplineTesting2EB\Plugins\TestingPlugin\Intermediate\Build\Win64\UE4Editor\Development\TestingPlugin\UE4Editor-TestingPlugin-3153.lib"

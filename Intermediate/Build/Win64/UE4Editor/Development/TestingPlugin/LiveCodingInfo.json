@@ -1,0 +1,25 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.TestingPlugin.cpp.obj": [
+			"RandomMeshActor.cpp.obj",
+			"RandomMeshGenerator.cpp.obj",
+			"RepeatedMeshActor.cpp.obj",
+			"RepeatedMeshGenerator.cpp.obj",
+			"RoadSplineActor.cpp.obj",
+			"RoadSplineGenerator.cpp.obj",
+			"SMeshPickerWindow.cpp.obj",
+			"SPathModeSelector.cpp.obj",
+			"TestingPlugin.cpp.obj"
+		],
+		"Module.TestingPlugin.gen.cpp.obj": [
+			"RandomMeshActor.gen.cpp.obj",
+			"RandomMeshGenerator.gen.cpp.obj",
+			"RepeatedMeshActor.gen.cpp.obj",
+			"RepeatedMeshGenerator.gen.cpp.obj",
+			"RoadSplineActor.gen.cpp.obj",
+			"RoadSplineGenerator.gen.cpp.obj",
+			"TestingPlugin.init.gen.cpp.obj"
+		]
+	}
+}
