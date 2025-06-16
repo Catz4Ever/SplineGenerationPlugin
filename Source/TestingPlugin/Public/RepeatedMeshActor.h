@@ -27,3 +27,10 @@ protected:
     UPROPERTY(VisibleAnywhere, Category = "Repeated Mesh Generator")
     URepeatedMeshGenerator* MeshGenerator;
 };
+
+
+
+
+
+
+

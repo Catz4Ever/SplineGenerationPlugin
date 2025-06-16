@@ -2,6 +2,6 @@
 	"BuildId": "17155196",
 	"Modules": 
 	{
-		"TestingPlugin": "UE4Editor-TestingPlugin-0439.dll"
+		"TestingPlugin": "UE4Editor-TestingPlugin.dll"
 	}
 }

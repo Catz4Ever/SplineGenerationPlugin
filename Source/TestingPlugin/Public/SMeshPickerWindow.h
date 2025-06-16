@@ -2,18 +2,21 @@
 
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
+
+#if WITH_EDITOR
+
 #include "AssetRegistry/AssetData.h"
-#include "Widgets/Views/SListView.h"
-#include "IContentBrowserSingleton.h"
 #include "Engine/StaticMesh.h"
 #include "AssetThumbnail.h"
 
 class SWrapBox;
 class SScrollBox;
+class STextBlock;
 
 class SMeshPickerWindow : public SCompoundWidget
 {
 public:
+    SMeshPickerWindow();
     SLATE_BEGIN_ARGS(SMeshPickerWindow) {}
         SLATE_EVENT(FSimpleDelegate, OnConfirmed)
         SLATE_EVENT(FSimpleDelegate, OnCancelled)
@@ -37,9 +40,12 @@ private:
     FReply OnConfirmClicked();
     FReply OnCancelClicked();
     FReply OnClearSelectionClicked();
+
     TSharedPtr<STextBlock> SelectedCountTextBlock;
     FText GetSelectedCountText() const;
 
 public:
     TArray<UStaticMesh*> GetSelectedMeshes() const;
 };
+
+#endif // WITH_EDITOR

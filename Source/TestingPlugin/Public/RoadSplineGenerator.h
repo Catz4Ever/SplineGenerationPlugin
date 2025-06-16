@@ -25,7 +25,7 @@ public:
 
 protected:
     void CreateSplineMeshComponent(int32 Index);
-    void ClearOldMeshes();  // 🔁 New cleanup method
+    void ClearOldMeshes();  
 
 private:
     UPROPERTY(Transient)

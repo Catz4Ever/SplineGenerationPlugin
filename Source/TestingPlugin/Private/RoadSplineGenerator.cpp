@@ -33,7 +33,7 @@ void URoadSplineGenerator::GenerateRoadMeshes()
 {
     if (!RoadMesh) return;
 
-    ClearOldMeshes();  // 🔁 Always clear previous generated meshes
+    ClearOldMeshes();  //Always clear previous generated meshes
 
     const float SplineLength = GetSplineLength();
     const int32 NumSections = FMath::FloorToInt(SplineLength / SectionLength);

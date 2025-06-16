@@ -1,13 +1,6 @@
 #include "RoadSplineActor.h"
 #include "RoadSplineGenerator.h"
 
-ARoadSplineActor::ARoadSplineActor()
-{
-    PrimaryActorTick.bCanEverTick = false;
-
-    RoadGenerator = CreateDefaultSubobject<URoadSplineGenerator>(TEXT("RoadGenerator"));
-    SetRootComponent(RoadGenerator);
-}
 
 #if WITH_EDITOR
 void ARoadSplineActor::OnConstruction(const FTransform& Transform)
@@ -26,6 +19,14 @@ void ARoadSplineActor::PostEditMove(bool bFinished)
     }
 }
 #endif
+
+ARoadSplineActor::ARoadSplineActor()
+{
+    PrimaryActorTick.bCanEverTick = false;
+
+    RoadGenerator = CreateDefaultSubobject<URoadSplineGenerator>(TEXT("RoadGenerator"));
+    SetRootComponent(RoadGenerator);
+}
 
 void ARoadSplineActor::UpdateRoad()
 {

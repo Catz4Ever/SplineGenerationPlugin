@@ -7,53 +7,62 @@ public class TestingPlugin : ModuleRules
 	public TestingPlugin(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
-		PublicIncludePaths.AddRange(
-			new string[] {
-				// ... add public include paths required here ...
-			}
-			);
-				
-		
-		PrivateIncludePaths.AddRange(
-			new string[] {
-				// ... add other private include paths required here ...
-			}
-			);
-			
-		
+
+		PublicIncludePaths.AddRange(new string[] { });
+
+		PrivateIncludePaths.AddRange(new string[] { });
+
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
-                "CoreUObject", "Engine", "InputCore", "Slate", "SlateCore", "EditorStyle", "KismetCompiler", "AssetTools","AssetRegistry"
-
-            }
-            );
-			
-		
-		PrivateDependencyModuleNames.AddRange(
-			new string[]
-			{
-                "Projects",
-                "InputCore",
-                "UnrealEd",
-                "ToolMenus",
-                "CoreUObject",
+				"CoreUObject",
 				"Engine",
 				"Slate",
 				"SlateCore",
-                "UnrealEd", "LevelEditor", "ToolMenus","KismetCompiler", "AssetTools","AssetRegistry"
+				"AssetRegistry"
+				
+			}
+		);
 
-            }
-            );
-
-
-        DynamicallyLoadedModuleNames.AddRange(
+		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				// ... add any modules that your module loads dynamically here ...
+				"Projects",
+				"CoreUObject",
+				"Engine",
+				"Slate",
+				"SlateCore",
+				"AssetRegistry"
+				
 			}
+		);
+
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.AddRange(new string[]
+			{
+				"UnrealEd",
+				"Slate",
+				"SlateCore",
+				"EditorStyle",
+				"ToolMenus",
+				"InputCore",
+				"PropertyEditor",
+				"AssetRegistry",
+				"ContentBrowser"
+			});
+
+            PublicDependencyModuleNames.AddRange(
+				new string[]
+				{
+					"AssetTools",
+					"ToolMenus",
+					"EditorStyle"
+				}
 			);
+		}
+
+        DynamicallyLoadedModuleNames.AddRange(new string[] { });
 	}
 }

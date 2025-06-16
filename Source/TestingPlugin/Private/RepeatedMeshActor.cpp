@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "RepeatedMeshActor.h"
 
 
@@ -38,3 +37,4 @@ void ARepeatedMeshActor::GenerateRepeatedMeshes()
         MeshGenerator->GenerateMeshes();
     }
 }
+

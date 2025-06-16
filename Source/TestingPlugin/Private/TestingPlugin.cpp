@@ -1,43 +1,39 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
-
 #include "TestingPlugin.h"
-#include "ToolMenus.h"
-#include "LevelEditor.h"
-#include "Framework/MultiBox/MultiBoxBuilder.h"
-#include "Misc/MessageDialog.h"
-#include "ToolMenuEntry.h"
-#include "ContentBrowserModule.h"
-#include "IContentBrowserSingleton.h"
 #include "AssetData.h"
 #include "Engine/StaticMesh.h"
-#include "SMeshPickerWindow.h"
-#include "SPathModeSelector.h"
 #include "RoadSplineActor.h"
-#include "RoadSplineGenerator.h"
-#include "Engine/Selection.h"
-#include "ScopedTransaction.h"
-#include "RepeatedMeshGenerator.h"
 #include "RepeatedMeshActor.h"
 #include "RandomMeshActor.h"
-#if WITH_EDITOR
-#include "Editor/UnrealEd/Public/LevelEditorViewport.h"
-#endif
 
+#if WITH_EDITOR
+#include "Framework/MultiBox/MultiBoxBuilder.h"
+#include "Misc/MessageDialog.h"
+#include "Editor/UnrealEd/Public/LevelEditorViewport.h"
+#include "Engine/Selection.h"
+#include "SPathModeSelector.h"
+#include "SMeshPickerWindow.h"
+#include "ToolMenus.h"
+#include "ToolMenuEntry.h"
+#include "ScopedTransaction.h"
+#include "Widgets/SWindow.h"
+#include "Framework/Application/SlateApplication.h"
+#include "EditorStyleSet.h"
+#endif
 
 #define LOCTEXT_NAMESPACE "FTestingPluginModule"
 
+#if WITH_EDITOR
+
 void FTestingPluginModule::StartupModule()
 {
-	// Register tool menus
-	UToolMenus::RegisterStartupCallback(
-		FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FTestingPluginModule::RegisterMenus));
+    UToolMenus::RegisterStartupCallback(
+        FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FTestingPluginModule::RegisterMenus));
 }
 
 void FTestingPluginModule::ShutdownModule()
 {
-	UToolMenus::UnRegisterStartupCallback(this);
-	UToolMenus::UnregisterOwner(this);
+    UToolMenus::UnRegisterStartupCallback(this);
+    UToolMenus::UnregisterOwner(this);
 }
 
 void FTestingPluginModule::RegisterMenus()
@@ -46,13 +42,14 @@ void FTestingPluginModule::RegisterMenus()
 
     UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar");
 
-    FToolMenuSection& Section = ToolbarMenu->AddSection("TestingPluginSection", TAttribute<FText>(), FToolMenuInsert("Settings", EToolMenuInsertType::After));
+    FToolMenuSection& Section = ToolbarMenu->
+        AddSection("SplinePluginSection", TAttribute<FText>(), FToolMenuInsert("Settings", EToolMenuInsertType::After));
 
     Section.AddEntry(FToolMenuEntry::InitToolBarButton(
-        "TestingPluginButton",
+        "SplinePluginButton",
         FUIAction(FExecuteAction::CreateRaw(this, &FTestingPluginModule::PluginButtonClicked)),
-        LOCTEXT("TestingPlugin_Label", "Mesh To Spline Plugin"),
-        LOCTEXT("TestingPlugin_Tooltip", "Click to start Testing Plugin action"),
+        LOCTEXT("SplinePlugin_Label", "Mesh To Spline Plugin"),
+        LOCTEXT("SplinePlugin_Tooltip", "Click to start the spline creation plugin action."),
         FSlateIcon(FEditorStyle::GetStyleSetName(), "Icons.Toolbar.Play")
     ));
 }
@@ -74,34 +71,6 @@ void FTestingPluginModule::PluginButtonClicked()
     FSlateApplication::Get().AddWindow(PickerWindow.ToSharedRef());
 }
 
-void FTestingPluginModule::OpenMeshPickerWindow()
-{
-    FAssetPickerConfig AssetPickerConfig;
-    AssetPickerConfig.Filter.ClassNames.Add(UStaticMesh::StaticClass()->GetFName());
-    AssetPickerConfig.Filter.bRecursivePaths = true;
-    AssetPickerConfig.InitialAssetViewType = EAssetViewType::List;
-    AssetPickerConfig.bAllowNullSelection = false;
-    AssetPickerConfig.bFocusSearchBoxWhenOpened = true;
-    AssetPickerConfig.SelectionMode = ESelectionMode::None;
-
-    AssetPickerConfig.OnAssetSelected = FOnAssetSelected::CreateRaw(this, &FTestingPluginModule::OnMeshSelected);
-
-    FContentBrowserModule& ContentBrowserModule = FModuleManager::LoadModuleChecked<FContentBrowserModule>("ContentBrowser");
-    TSharedRef<SWidget> PickerWidget = ContentBrowserModule.Get().CreateAssetPicker(AssetPickerConfig);
-
-    PickerWindow = SNew(SWindow)
-        .Title(FText::FromString("Select a Mesh"))
-        .ClientSize(FVector2D(600, 400))
-        .SupportsMinimize(false)
-        .SupportsMaximize(false)
-        [
-            PickerWidget
-        ];
-
-    FSlateApplication::Get().AddWindow(PickerWindow.ToSharedRef());
-}
-
-//returns meshes from SMeshPickerWindow
 void FTestingPluginModule::OnMeshesConfirmed()
 {
     CachedSelectedMeshes = MeshPickerWidget->GetSelectedMeshes();
@@ -119,7 +88,6 @@ void FTestingPluginModule::OnMeshesConfirmed()
         ];
 
     FSlateApplication::Get().AddWindow(ModeWindow.ToSharedRef());
-
 }
 
 void FTestingPluginModule::OnMeshesCancelled()
@@ -479,7 +447,7 @@ void FTestingPluginModule::HandleContinuousMode()
         ModeWindow.Reset();
     }
 }
-
+#endif 
 #undef LOCTEXT_NAMESPACE
 	
 IMPLEMENT_MODULE(FTestingPluginModule, TestingPlugin)

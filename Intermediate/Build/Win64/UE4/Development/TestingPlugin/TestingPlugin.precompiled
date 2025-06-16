@@ -1,0 +1,6 @@
+{
+	"OutputFiles": [
+		"Module.TestingPlugin.cpp.obj",
+		"Module.TestingPlugin.gen.cpp.obj"
+	]
+}
